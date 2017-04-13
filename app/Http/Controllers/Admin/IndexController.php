@@ -2,30 +2,54 @@
 
 namespace App\Http\Controllers\admin;
 
+
+use App\Http\Requests\AdminLoginRequest;
+use App\Http\Requests\AdminRegisterRequest;
+use App\Model\Admin;
+use App\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
+    /*显示后台首页*/
     public function index()
     {
         return view('admin/index');
     }
+    /*显示登陆界面*/
     public function login()
     {
         return view('admin/login');
     }
-    public function doLogin(Request $request)
+    /*执行登陆*/
+    public function doLogin(AdminLoginRequest $request)
     {
-          $name = $request->input('name');
-          $pwd = $request->input('pwd');
-          $result = DB::select("select * from admins where name ='{$name}'and pwd = '{$pwd}'");
-          if($result){
-              session(['admin_username'=>$name]);
-              return redirect('admin/index');
-          }else{
-              return back();
-          }
+        $result = DB::table('admins')->select('*')->where('name',$request->name)->get();
+        dd($result[0]);
     }
+    /*显示注册表单*/
+    public function register()
+    {
+        return  view('admin/register');
+    }
+    /*注册操作*/
+    public function doRegister(AdminRegisterRequest $request)
+    {
+//        dd($request->all());
+        $pwd = md5($request->password);
+        $data = array(
+            'password' => $pwd,
+            'name' => $request->name,
+        );
+         $result = Admin::create($data);
+         if($result){
+             return redirect('admin/login');
+         }else{
+             return back();
+         }
+    }
+
 }

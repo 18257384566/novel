@@ -32,10 +32,23 @@
                 <span class="icon-bar"></span>
             </a>
 
-            <a class="brand" href="index.html">
+            <a class="brand" href="">
                 网站名字
             </a>
 
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+
+                    <li class="">
+                        <a href="{{url('admin/register')}}" class="">
+                            注册
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
 
         </div> <!-- /container -->
 
@@ -56,15 +69,26 @@
             <div class="login-fields">
 
                 <p>请提供您的详细信息</p>
+                @if(count($errors)>0)
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>
+                                    {{$error}}
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 {{csrf_field()}}
                 <div class="field">
                     <label for="username">Username</label>
-                    <input type="text" id="username" name="name" value="" placeholder="Username" class="login username-field" />
+                    <input type="text" name="name"  placeholder="Username" class="login username-field" />
                 </div> <!-- /field -->
 
                 <div class="field">
                     <label for="password">Password:</label>
-                    <input type="password" id="password" name="pwd" value="" placeholder="Password" class="login password-field"/>
+                    <input type="password"  name="password" placeholder="Password" class="login password-field"/>
                 </div> <!-- /password -->
 
             </div> <!-- /login-fields -->

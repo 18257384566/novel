@@ -15,37 +15,51 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('admin/login','Admin\IndexController@login');
-Route::get('admin/index','Admin\IndexController@index');
-Route::post('admin/doLogin','Admin\IndexController@doLogin');
-Route::get('admin/userlist','Admin\UserController@show');
-Route::get('admin/edit/{id}','Admin\UserController@edit');
-Route::post('admin/edit/{id}','Admin\UserController@doEdit');
-Route::get('admin/add','Admin\UserController@add');
-Route::post('admin/doAdd','Admin\UserController@doAdd');
-Route::get('admin/del/{id}','Admin\UserController@del');
-Route::get('admin/bookList','Admin\BookController@show');
-Route::get('admin/categoryList','Admin\CategoryController@show');
-Route::get('admin/orderList','Admin\OrderController@show');
+Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
+    Route::group(['prefix' => 'user'],function(){
+        Route::get('list','UserController@show');
+        Route::get('edit/{id}','UserController@edit');
+        Route::post('edit/{id}','UserController@doEdit');
+        Route::get('add','UserController@add');
+        Route::post('doAdd','UserController@doAdd');
+        Route::get('del/{id}','UserController@del');
+    });
+    Route::group(['prefix' => 'book'],function(){
+        Route::get('list','BookController@show');
+        Route::get('add','BookController@add');
+        Route::post('doAdd','BookController@doAdd');
+        Route::get('edit/{id}','BookController@edit');
+        Route::post('edit/{id}','BookController@doEdit');
+        Route::get('del/{id}','BookController@del');
+        Route::get('detail/{id}','BookController@detailShow');
+        Route::get('detailadd/{id}','BookController@detailAdd');
+        Route::post('detailadd/{id}','BookController@detailDoAdd');
+    });
+    Route::get('login','IndexController@login');
+    Route::post('doLogin','IndexController@doLogin');
+    Route::get('register','IndexController@register');
+    Route::post('doRegister','IndexController@doRegister');
+    Route::get('index','IndexController@index');
 
-//权限管理
-Route::any('admin/perm','Admin\PermissionsController@show');
-//Route::any('admin/perm-add','Admin\PermissionsController@add');
-//Route::get('admin/perm-del/{permission_id}','Admin\PermissionsController@del');
-//Route::get('admin/perm-update/{permission_id}','Admin\PermissionsController@update');
 
-//角色管理
-Route::get('admin/roles','Admin\RolesController@show');
+    Route::get('category/list','CategoryController@show');
+    Route::get('order/list','OrderController@show');
+});
+
 
 
 Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
     Route::get('index','IndexController@show');
     Route::get('login','LoginController@show');
+    Route::post('doLogin','LoginController@doLogin');
+    Route::get('logout','LoginController@logout');
     Route::get('reg','RegisterController@show');
+    Route::post('doReg','RegisterController@doReg');
     Route::get('space','SpaceController@show');
     Route::get('category','CategoryController@show');
     Route::get('Billboard','BillboardController@show');
     Route::get('detail','DetailsController@show');
-    Route::get('Publisher','PublisherController@show');
+    Route::get('publisher','PublisherController@show');
+    Route::get('verify/{confirmed_code}','RegisterController@emailConfirm');
 });
 

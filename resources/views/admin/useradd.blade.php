@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <form action="{{url('admin/doAdd')}}" method="post">
+                <form action="{{url('admin/user/doAdd')}}" method="post">
                     {{csrf_field()}}
                     <div class="form-group">
                         <label for="exampleInputEmail1">姓名</label>
