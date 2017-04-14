@@ -16,6 +16,21 @@
                         @endif
                     </div>
                     <div class="form-group">
+                        <label for="exampleInputEmail1">分类</label>
+                        <select name="c_id" >
+                            @foreach ($data as $k => $v)
+                            {{$num = substr_count($v->sort,',')-2}}{{$line = str_repeat('---',$num)}}
+                            <option value="{{$v->id}}">{{$line.$v->name}}</option>
+                            @endforeach
+                        </select>
+                    @if($errors->first('title'))
+                            <div class="alert alert-danger alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                {{$errors->first('title')}}
+                            </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
                         <label for="exampleInputPassword1">封面</label>
                         <input type="file"   name="icon" >
                         @if($errors->first('icon'))
@@ -38,7 +53,6 @@
                     <div class="form-group">
                         <label for="exampleInputPassword1">描述</label>
                         <textarea name="desc" id="" cols="40" rows="10"></textarea>
-                        {{--<input type="text" class="form-control" id="exampleInputPassword1" name="desc" >--}}
                         @if($errors->first('desc'))
                             <div class="alert alert-danger alert-dismissable">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>

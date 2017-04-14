@@ -80,6 +80,11 @@
                         </ul>
                     </div>
                 @endif
+                @if (session('mess'))
+                    <div class="alert alert-danger">
+                        {{ session('mess') }}
+                    </div>
+                @endif
                 {{csrf_field()}}
                 <div class="field">
                     <label for="username">Username</label>

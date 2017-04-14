@@ -35,6 +35,14 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
         Route::get('detailadd/{id}','BookController@detailAdd');
         Route::post('detailadd/{id}','BookController@detailDoAdd');
     });
+    Route::group(['prefix' => 'category'],function(){
+        Route::get('list','CategoryController@show');
+        Route::any('add','CategoryController@add');
+        Route::any('addSon/{id}','CategoryController@addSon');
+        Route::get('showSon/{id}','CategoryController@showSon');
+        Route::any('edit/{id}','CategoryController@edit');
+        Route::get('del/{id}','CategoryController@del');
+    });
     Route::get('login','IndexController@login');
     Route::post('doLogin','IndexController@doLogin');
     Route::get('register','IndexController@register');
@@ -42,8 +50,19 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
     Route::get('index','IndexController@index');
 
 
-    Route::get('category/list','CategoryController@show');
     Route::get('order/list','OrderController@show');
+
+    //权限管理
+    Route::any('perm','PermissionsController@show');
+    Route::any('perm-add','PermissionsController@add');
+    Route::get('perm-del/{permission_id}','PermissionsController@del');
+    Route::any('perm-update/{permission_id}','PermissionsController@update');
+
+    //角色管理
+    Route::get('roles','RolesController@show');
+    Route::any('roles-add','RolesController@add');
+    Route::any('roles-update/{role_id}','RolesController@update');
+
 });
 
 

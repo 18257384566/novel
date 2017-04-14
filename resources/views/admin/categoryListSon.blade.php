@@ -21,7 +21,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <a href="{{url('admin/category/add')}}">添加顶级分类</a>
+                    <a href="{{url('admin/category/add')}}">添加顶级分类</a>　<a onclick="history.go(-1)" >返回上一级</a>
+                    <br>
                     <table class="table table-bordered">
                         <tr>
                             <th>ID</th>
@@ -31,16 +32,22 @@
                             <th>display</th>
                             <th>操作</th>
                         </tr>
-                        @foreach($result as $v)
+                        @if(empty($result))
                             <tr>
-                                <td>{{$v->id}}</td>
-                                <td>{{$v->name}}</td>
-                                <td>{{$v->pid}}</td>
-                                <td>{{$v->path}}</td>
-                                <td>@if($v->display == 1) 显示 @else 隐藏 @endif</td>
-                                <td><a href="{{url('admin/category/showSon/'.$v->id)}}" class="btn btn-success">查看子分类</a>　<a href="{{url('admin/category/addSon'.'/'.$v->id)}}" class="btn btn-info">添加子分类</a>　<a href="{{url('admin/category/edit/'.$v->id)}}" class="btn btn-warning">编辑</a>　<a href="{{url('admin/category/del/'.$v->id)}}" class="btn btn-danger">删除</a></td>
+                                <td colspan="6">暂无分类</td>
                             </tr>
+                            @else
+                            @foreach($result as $v)
+                                <tr>
+                                    <td>{{$v->id}}</td>
+                                    <td>{{$v->name}}</td>
+                                    <td>{{$v->pid}}</td>
+                                    <td>{{$v->path}}</td>
+                                    <td>@if($v->display == 1) 显示 @else 隐藏 @endif</td>
+                                    <td><a href="{{url('admin/category/showSon/'.$v->id)}}" class="btn btn-success">查看子分类</a>　<a href="{{url('admin/category/addSon'.'/'.$v->id)}}" class="btn btn-info">添加子分类</a>　<a href="{{url('admin/category/edit/'.$v->id)}}" class="btn btn-warning">编辑</a>　<a href="{{url('admin/category/del/'.$v->id)}}" class="btn btn-danger">删除</a></td>
+                                </tr>
                             @endforeach
+                        @endif
                     </table>
                     {{$result->links('admin/page')}}
                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Model\Book;
 use App\Model\Book_info;
+use App\Model\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,8 @@ class BookController extends Controller
     }
     public function add()
     {
-        return view('admin/bookadd');
+        $data = DB::select('select name,id,concat(path,id,",") sort from category order by sort');
+        return view('admin/bookadd',compact('data'));
     }
     public function doAdd(Request $request)
     {

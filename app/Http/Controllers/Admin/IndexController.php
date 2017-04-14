@@ -27,8 +27,14 @@ class IndexController extends Controller
     /*执行登陆*/
     public function doLogin(AdminLoginRequest $request)
     {
-        $result = DB::table('admins')->select('*')->where('name',$request->name)->get();
-        dd($result[0]);
+        $pwd = md5($request->password);
+        $result = DB::table('admins')->select('*')->where('name',$request->name)->where('password',$pwd)->get();
+        if(empty($result[0])){
+            return redirect('admin/login')->with('mess','用户名不存在或密码错误');
+        }else{
+            session(['admin'=> $request->name]);
+           return redirect('admin/index');
+        }
     }
     /*显示注册表单*/
     public function register()

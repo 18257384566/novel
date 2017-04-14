@@ -14,7 +14,7 @@ class TablesBooksTable extends Migration
     public function up()
     {
         Schema::table('books', function (Blueprint $table) {
-            $table->rememberToken();
+            $table->integer('c_id');
         });
     }
 
