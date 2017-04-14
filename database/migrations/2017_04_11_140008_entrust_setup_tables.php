@@ -11,19 +11,19 @@ class EntrustSetupTables extends Migration
      */
     public function up()
     {
-        // Create table for storing roles
+        // 创建角色表
         Schema::create('roles', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name')->unique();
-            $table->string('display_name')->nullable();
-            $table->string('description')->nullable();
+            $table->increments('id');    //自增id
+            $table->string('name')->unique();   //角色名称
+            $table->string('display_name')->nullable();     //描述名称
+            $table->string('description')->nullable();      //对当前角色描述
             $table->timestamps();
         });
 
-        // Create table for associating roles to users (Many-to-Many)
+        // 用户角色表（中间表）
         Schema::create('role_user', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned();
-            $table->integer('role_id')->unsigned();
+            $table->integer('user_id')->unsigned();     //用户id
+            $table->integer('role_id')->unsigned();     //角色id
 
             $table->foreign('user_id')->references('id')->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
@@ -33,7 +33,7 @@ class EntrustSetupTables extends Migration
             $table->primary(['user_id', 'role_id']);
         });
 
-        // Create table for storing permissions
+        // 权限表
         Schema::create('permissions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
@@ -42,7 +42,7 @@ class EntrustSetupTables extends Migration
             $table->timestamps();
         });
 
-        // Create table for associating permissions to roles (Many-to-Many)
+        // 权限角色表（中间表）
         Schema::create('permission_role', function (Blueprint $table) {
             $table->integer('permission_id')->unsigned();
             $table->integer('role_id')->unsigned();

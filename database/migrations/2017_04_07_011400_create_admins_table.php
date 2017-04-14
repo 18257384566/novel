@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TablesBooksTable extends Migration
+class CreateAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class TablesBooksTable extends Migration
      */
     public function up()
     {
-        Schema::table('books', function (Blueprint $table) {
-            $table->integer('c_id');
+        Schema::create('admins',function(Blueprint $table){
+             $table->increments('id');
+             $table->string('name');
+             $table->string('pwd');
         });
     }
 
@@ -25,8 +27,6 @@ class TablesBooksTable extends Migration
      */
     public function down()
     {
-        Schema::table('books', function (Blueprint $table) {
-            //
-        });
+        //
     }
 }

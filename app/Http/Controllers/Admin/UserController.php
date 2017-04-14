@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\User;
+use App\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +12,6 @@ class UserController extends Controller
     public function show()
     {
         $result = User::paginate(5);
-//        dd($result);
         return view('admin/userlist',compact('result'));
     }
     public function edit($id)
@@ -39,7 +38,7 @@ class UserController extends Controller
        $user->grade = $request->input('grade','');
        $result = $user->save();
        if($result){
-           return redirect('admin/user/list');
+           return redirect('admin/userlist');
        }else{
            return back();
        }
@@ -68,7 +67,7 @@ class UserController extends Controller
         $user->grade = $request->input('grade','');
         $result = $user->save();
         if($result){
-            return redirect('admin/user/list');
+            return redirect('admin/userlist');
         }else{
             return back();
         }
@@ -77,6 +76,6 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        return redirect('admin/user/list');
+        return redirect('admin/userlist');
     }
 }

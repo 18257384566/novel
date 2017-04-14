@@ -1,11 +1,9 @@
-@extends('layouts.master')
-@section('title','权限管理')
+@extends('layouts/master')
 @section('link')
     <style>
         input{height:30px;}
     </style>
 @endsection
-{{--nav--}}
 @section('nav')
     <li class="active" ><a href="{{url('admin/index')}}"><i class="icon-home"></i><span>主页</span> </a> </li>
     <li><a href="{{url('admin/userlist')}}"><i class=" icon-user"></i><span>用户列表</span> </a> </li>
@@ -30,36 +28,29 @@
         </ul>
     </li>
 @endsection
-{{--！nav--}}
-
-{{--content--}}
 @section('content')
     <div class="container">
-        <span class="shortcut-icon icon-plus" aria-hidden="true"><a href="">新增权限</a></span> &nbsp;&nbsp;
-        <span class="shortcut-icon icon-trash" aria-hidden="true"><a href="">批量删除</a></span> &nbsp;&nbsp;
-        <span class="shortcut-icon icon-circle-arrow-down" aria-hidden="true"><a href="">更新排序</a></span> &nbsp;&nbsp;
-        <hr>
-
         <!--面包屑导航 开始-->
         <div class="crumb_warp">
             <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-            <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">权限管理</a> &raquo; 添加权限
+            <i class="fa fa-home"></i> <a href="{{asset('admin/index')}}">首页</a> &raquo; <a href="{{asset('admin/perm')}}">权限管理</a> &raquo; 添加权限
         </div>
         <!--面包屑导航 结束-->
+        <hr>
 
         <div class="result_wrap">
-            <form action="{{url('/admin/perm-add')}}" method="post">
+            <form action="" method="post">
                 {{csrf_field()}}
                 <table class="add_tab">
                     <tbody>
                     <tr>
-                        <th><i class="require">*</i>权限路由：</th>
+                        <th><i class="require">*</i>角色名称：</th>
                         <td>
                             <input type="text" class="mg" name="name"> {{ $errors ->first('name') }}
                         </td>
                     </tr>
                     <tr>
-                        <th><i class="require">*</i>权限描述：</th>
+                        <th><i class="require">*</i>角色描述：</th>
                         <td>
                             <input type="text" class="mg" name="display_name"> {{ $errors ->first('display_name') }}
                         </td>
@@ -81,6 +72,5 @@
                 </table>
             </form>
         </div>
-
+    </div>
 @endsection
-{{--!content--}}

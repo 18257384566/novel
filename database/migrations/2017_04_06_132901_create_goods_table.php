@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Table2UsersTable extends Migration
+class CreateGoodsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class Table2UsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        //
+        schema::create('goods',function(Blueprint $table){
+            $table->increments('id');
             $table->string('name');
+            $table->string('image');
         });
     }
 
@@ -25,8 +28,6 @@ class Table2UsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            //
-        });
+        //
     }
 }

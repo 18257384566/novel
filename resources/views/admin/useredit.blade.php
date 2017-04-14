@@ -16,17 +16,17 @@
                             @endif
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">性别</label>
+                        <label for="exampleInputPassword1">年龄</label>
                         <input type="text" class="form-control" id="exampleInputPassword1" name="age" value="{{$user->age}}">
-                        @if($errors->first('sex'))
+                        @if($errors->first('age'))
                         <div class="alert alert-danger alert-dismissable">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            {{$errors->first('sex')}}
+                            {{$errors->first('age')}}
                         </div>
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword1">头像</label>
+                        <label for="exampleInputPassword1">班期</label>
                         <input type="text" class="form-control" id="exampleInputPassword1" name="grade" value="{{$user->grade}}">
                         @if($errors->first('grade'))
                             <div class="alert alert-danger alert-dismissable">

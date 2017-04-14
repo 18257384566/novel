@@ -49,7 +49,7 @@
             width: 100%;
             padding: 15px 0;
             margin-bottom: 0;
-            z-index: 100;
+            z-index: 10;
             -webkit-transition: all .35s;
             -moz-transition: all .35s;
             -ms-transition: all .35s;
@@ -226,16 +226,16 @@
             <div id="nav-menu" class="navbar-collapse collapse" role="navigation">
                 <ul class="nav navbar-nav clean-menu-wrapper ">
                     <li class="active">
-                        <a href="{{asset('home/index')}}">首页</a>
+                        <a href="{{asset('/home/index')}}">首页</a>
                     </li>
                     <li>
                         <a href="{{asset('home/category')}}">分类</a>
                     </li>
                     <li>
-                        <a href="#featured-works">榜单</a>
+                        <a href="{{asset('home/Billboard')}}">榜单</a>
                     </li>
                     <li>
-                        <a href="#offer">独家作品</a>
+                        <a href="{{asset('home/publisher')}}">独家作品</a>
                     </li>
                     <li>
                         <a href="#pricing">机构专区</a>
@@ -246,13 +246,8 @@
                 </ul>
                 <!-- navbar-collapse end-->
                 <div class="navbar">
-                    @if(Auth::check())
-                        <a href="{{asset('home/login')}}" style="color: #81D362;">{{Auth::user()->name}}</a> |
-                        <a href="{{asset('home/logout')}}" style="color: #81D362;">注销</a>
-                    @else
-                        <a href="{{asset('home/login')}}" style="color: #81D362;">登陆</a> |
-                        <a href="{{asset('home/reg')}}" style="color: #81D362;">注册</a>
-                    @endif
+                    <a href="{{asset('home/login')}}" style="color: #81D362;">登陆</a> |
+                    <a href="{{asset('home/reg')}}" style="color: #81D362;">注册</a>
                 </div>
             </div>
         </div>

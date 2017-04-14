@@ -3,6 +3,7 @@
 .accordion_container{
 	margin:20px auto;
 	width:280px;
+	height: 680px;
 	margin-left:20px;
 }
 .accordion_container .content, .accordion_container .tab{
@@ -17,21 +18,24 @@
 }
 .accordion_container .tab a:hover{
 	color:#F00;
+	/*text-decoration:underline;*/
 }
 .accordion_container .tab a{
 	color:#4B7196;
 	text-decoration:none;
 }
-.accordion_container .tab span{float:left;}
-.accordion_container .tab strong{ margin-left:15px;float:left;}
+/*a{color:inherit}*/
+.accordion_container .tab span{float:left;margin-top:-5px;}
+.accordion_container .tab strong{ margin-left:15px;float:left;margin-top:-5px;}
 .accordion_container .tab{
 	padding:10px;
-
+	
 }
 
 .accordion_container .content{
 	width:280px;
 	height:120px;
+	width:280px;
 }
 .accordion_container .content img{
 	display:block;

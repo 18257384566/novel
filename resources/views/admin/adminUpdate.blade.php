@@ -2,7 +2,7 @@
 @section('title','权限管理')
 @section('link')
     <style>
-        input{height:30px;}
+        input{height: 30px;}
     </style>
 @endsection
 {{--nav--}}
@@ -16,7 +16,7 @@
         <ul class="dropdown-menu">
             <li><a href="{{asset('admin/perm')}}">权限管理</a></li>
             <li><a href="{{asset('admin/roles')}}">角色管理</a></li>
-            <li><a href="pricing.html">管理员管理</a></li>
+            <li><a href="{{asset('admin/admin')}}">管理员管理</a></li>
         </ul>
     </li>
     <li class="dropdown"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-long-arrow-down"></i><span>Drops</span> <b class="caret"></b></a>
@@ -35,39 +35,46 @@
 {{--content--}}
 @section('content')
     <div class="container">
-        <span class="shortcut-icon icon-plus" aria-hidden="true"><a href="">新增权限</a></span> &nbsp;&nbsp;
-        <span class="shortcut-icon icon-trash" aria-hidden="true"><a href="">批量删除</a></span> &nbsp;&nbsp;
-        <span class="shortcut-icon icon-circle-arrow-down" aria-hidden="true"><a href="">更新排序</a></span> &nbsp;&nbsp;
-        <hr>
-
-        <!--面包屑导航 开始-->
-        <div class="crumb_warp">
-            <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-            <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">权限管理</a> &raquo; 添加权限
-        </div>
-        <!--面包屑导航 结束-->
-
+        <!--结果集标题与导航组件 开始-->
         <div class="result_wrap">
-            <form action="{{url('/admin/perm-add')}}" method="post">
+            <div class="result_content">
+                <div class="short_wrap">
+                    <a href="#"><i class="fa fa-plus"></i>新增文章</a>
+                    <a href="#"><i class="fa fa-recycle"></i>批量删除</a>
+                    <a href="#"><i class="fa fa-refresh"></i>用户修改</a>
+                </div>
+            </div>
+        </div>
+        <!--结果集标题与导航组件 结束-->
+        <hr>
+        <div class="result_wrap">
+            <form action="" method="post">
                 {{csrf_field()}}
                 <table class="add_tab">
                     <tbody>
+                    @foreach($result as $item)
                     <tr>
-                        <th><i class="require">*</i>权限路由：</th>
+                        <th><i class="require">*</i>用户名：</th>
                         <td>
-                            <input type="text" class="mg" name="name"> {{ $errors ->first('name') }}
+                            <input type="text" class="mg" name="name" value="{{$item->name}}" > {{$errors->first('name')}}
                         </td>
                     </tr>
                     <tr>
-                        <th><i class="require">*</i>权限描述：</th>
+                        <th><i class="require">*</i>邮箱：</th>
                         <td>
-                            <input type="text" class="mg" name="display_name"> {{ $errors ->first('display_name') }}
+                            <input type="email" class="mg" name="email" value="{{$item->email}}"> {{$errors->first('email')}}
                         </td>
                     </tr>
                     <tr>
-                        <th>描述：</th>
+                        <th><i class="require">*</i>密码：</th>
                         <td>
-                            <textarea name="description"></textarea> {{ $errors ->first('description') }}
+                            <input type="password" class="mg" name="password" > {{$errors->first('password')}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><i class="require">*</i>确认密码：</th>
+                        <td>
+                            <input type="password" class="mg" name="password_confirmation"> {{$errors->first('repassword')}}
                         </td>
                     </tr>
                     <tr>
@@ -77,10 +84,11 @@
                             <input type="button" class="back" onclick="history.go(-1)" value="返回">
                         </td>
                     </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </form>
         </div>
-
+    </div>
 @endsection
 {{--!content--}}

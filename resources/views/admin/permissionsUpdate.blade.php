@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','权限管理')
+@section('title','权限修改')
 @section('link')
     <style>
         input{height:30px;}
@@ -43,31 +43,31 @@
         <!--面包屑导航 开始-->
         <div class="crumb_warp">
             <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
-            <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">权限管理</a> &raquo; 添加权限
+            <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">权限管理</a> &raquo; 修改权限
         </div>
         <!--面包屑导航 结束-->
 
         <div class="result_wrap">
-            <form action="{{url('/admin/perm-add')}}" method="post">
+            <form action="" method="post">
                 {{csrf_field()}}
                 <table class="add_tab">
                     <tbody>
                     <tr>
                         <th><i class="require">*</i>权限路由：</th>
                         <td>
-                            <input type="text" class="mg" name="name"> {{ $errors ->first('name') }}
+                            <input type="text" class="mg" name="name" value="{{$permission->name}}"> {{ $errors ->first('name') }}
                         </td>
                     </tr>
                     <tr>
                         <th><i class="require">*</i>权限描述：</th>
                         <td>
-                            <input type="text" class="mg" name="display_name"> {{ $errors ->first('display_name') }}
+                            <input type="text" class="mg" name="display_name" value="{{$permission->display_name}}"> {{ $errors ->first('display_name') }}
                         </td>
                     </tr>
                     <tr>
                         <th>描述：</th>
                         <td>
-                            <textarea name="description"></textarea> {{ $errors ->first('description') }}
+                            <textarea name="description">{{$permission->description}}</textarea> {{ $errors ->first('description') }}
                         </td>
                     </tr>
                     <tr>

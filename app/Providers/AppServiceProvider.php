@@ -7,6 +7,8 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
+
+
     /**
      * Bootstrap any application services.
      *
@@ -14,10 +16,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-        DB::listen(function($query){
-           echo $query->sql;
-        });
+        //监听
+//        DB::listen(function  ($query){
+//            echo $query ->sql;
+//        });
 
     }
 
@@ -30,4 +32,6 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+
+
 }

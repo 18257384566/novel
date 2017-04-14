@@ -54,11 +54,12 @@
                     <td>{{$res->name}}</td>
                     <td>{{$res->display_name}}</td>
                     <td>{{$res->description}}</td>
-                    <td><a href="">修改</a> <a href="/admin/perm-del/{{$res->id}}">删除</a></td>
+                    <td><a href="/admin/perm-update/{{$res->id}}">修改</a> <a href="/admin/perm-del/{{$res->id}}">删除</a></td>
                 </tr>
                 @endforeach
                 </tbody>
             </table>
+            {{$result->links()}}
         </div>
     </div>
 

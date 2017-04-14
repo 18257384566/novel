@@ -15,70 +15,47 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix'=>'admin','namespace'=>'Admin'],function(){
-    Route::group(['prefix' => 'user'],function(){
-        Route::get('list','UserController@show');
-        Route::get('edit/{id}','UserController@edit');
-        Route::post('edit/{id}','UserController@doEdit');
-        Route::get('add','UserController@add');
-        Route::post('doAdd','UserController@doAdd');
-        Route::get('del/{id}','UserController@del');
-    });
-    Route::group(['prefix' => 'book'],function(){
-        Route::get('list','BookController@show');
-        Route::get('add','BookController@add');
-        Route::post('doAdd','BookController@doAdd');
-        Route::get('edit/{id}','BookController@edit');
-        Route::post('edit/{id}','BookController@doEdit');
-        Route::get('del/{id}','BookController@del');
-        Route::get('detail/{id}','BookController@detailShow');
-        Route::get('detailadd/{id}','BookController@detailAdd');
-        Route::post('detailadd/{id}','BookController@detailDoAdd');
-    });
-    Route::group(['prefix' => 'category'],function(){
-        Route::get('list','CategoryController@show');
-        Route::any('add','CategoryController@add');
-        Route::any('addSon/{id}','CategoryController@addSon');
-        Route::get('showSon/{id}','CategoryController@showSon');
-        Route::any('edit/{id}','CategoryController@edit');
-        Route::get('del/{id}','CategoryController@del');
-    });
-    Route::get('login','IndexController@login');
-    Route::post('doLogin','IndexController@doLogin');
-    Route::get('register','IndexController@register');
-    Route::post('doRegister','IndexController@doRegister');
-    Route::get('index','IndexController@index');
+Route::get('admin/login','Admin\IndexController@login');
+Route::get('admin/index','Admin\IndexController@index');
+Route::post('admin/doLogin','Admin\IndexController@doLogin');
+Route::get('admin/userlist','Admin\UserController@show');
+Route::get('admin/edit/{id}','Admin\UserController@edit');
+Route::post('admin/edit/{id}','Admin\UserController@doEdit');
+Route::get('admin/add','Admin\UserController@add');
+Route::post('admin/doAdd','Admin\UserController@doAdd');
+Route::get('admin/del/{id}','Admin\UserController@del');
+Route::get('admin/bookList','Admin\BookController@show');
+Route::get('admin/categoryList','Admin\CategoryController@show');
+Route::get('admin/orderList','Admin\OrderController@show');
 
+//权限管理
+Route::any('admin/perm','Admin\PermissionsController@show');
+Route::any('admin/perm-add','Admin\PermissionsController@add');
+Route::get('admin/perm-del/{permission_id}','Admin\PermissionsController@del');
+Route::any('admin/perm-update/{permission_id}','Admin\PermissionsController@update');
 
-    Route::get('order/list','OrderController@show');
+//角色管理
+Route::get('admin/roles','Admin\RolesController@show');
+Route::any('admin/roles-add','Admin\RolesController@add');
+Route::any('admin/roles-Update/{role_id}','Admin\RolesController@update');
+Route::get('admin/roles-del/{role_id}','Admin\RolesController@del');
 
-    //权限管理
-    Route::any('perm','PermissionsController@show');
-    Route::any('perm-add','PermissionsController@add');
-    Route::get('perm-del/{permission_id}','PermissionsController@del');
-    Route::any('perm-update/{permission_id}','PermissionsController@update');
+//分配权限
+Route::any('admin/deal/{role_id}','Admin\RolesController@deal');
 
-    //角色管理
-    Route::get('roles','RolesController@show');
-    Route::any('roles-add','RolesController@add');
-    Route::any('roles-update/{role_id}','RolesController@update');
-
-});
-
-
+//用户管理
+Route::get('admin/admin','Admin\AdminController@show');
+Route::any('admin/admin-add','Admin\AdminController@add');
+Route::any('admin/admin-update/{id}','Admin\AdminController@update');
 
 Route::group(['prefix'=>'home','namespace'=>'Home'],function(){
     Route::get('index','IndexController@show');
     Route::get('login','LoginController@show');
-    Route::post('doLogin','LoginController@doLogin');
-    Route::get('logout','LoginController@logout');
     Route::get('reg','RegisterController@show');
-    Route::post('doReg','RegisterController@doReg');
     Route::get('space','SpaceController@show');
     Route::get('category','CategoryController@show');
     Route::get('Billboard','BillboardController@show');
     Route::get('detail','DetailsController@show');
-    Route::get('publisher','PublisherController@show');
-    Route::get('verify/{confirmed_code}','RegisterController@emailConfirm');
+    Route::get('Publisher','PublisherController@show');
 });
 

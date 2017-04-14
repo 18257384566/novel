@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('home/css/login.css')}}">
     <style>
         .wrapper{height:673px;margin-top:-340px; }
-        .pos{margin-top:30px;}
+        .pos{margin-top:130px;}
     </style>
 </head>
 <body>
@@ -17,43 +17,12 @@
         <div class="container">
             <div class="pos">
                 <h1>登陆</h1>
-                <br>
-                <p><a href="{{url('home/reg')}}" style="color:#fff; text-decoration: none; cursor: pointer">点此注册</a></p>
-                <br>
-                @if (session('mess'))
-                    <div class="alert alert-success">
-                        {{ session('mess') }}
-                    </div>
-                @endif
-                <form class="form" action="{{url('home/doLogin')}}" method="post">
-                    {{csrf_field()}}
-                    <p><input type="email" name="email" placeholder="邮箱">
-                        @if(count($errors)>0)
-                            {{$errors->first('email')}}
-                        @endif
-                    </p>
-                    <br>
-                    <p><input type="password" name="password" placeholder="密码">
-                        @if(count($errors)>0)
-                            {{$errors->first('password')}}
-                        @endif
-                    </p>
-                    <br>
-                    <div style="width:250px;height:20px;margin-left:175px;">
-                        <div style="float:left">
-                            <p><input type="text" name="code" placeholder="验证码" style="width: 120px">
-                                @if(count($errors)>0)
-                                    {{$errors->first('code')}}
-                                @endif
-                            </p>
-                        </div>
-                        <div style="float:right">
-                            {!! captcha_img() !!}
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                    <input type="submit"   value="登陆">
+                <p><a href="##" style="color:#fff; text-decoration: none; cursor: pointer">点此注册</a></p>
+                <form class="form">
+                    <input type="text" placeholder="用户名">
+                    <input type="password" placeholder="密码">
+                    <input type="text" placeholder="验证码" style="width: 120px">
+                    <button type="submit" id="login-button">登陆</button>
                 </form>
             </div>
         </div>

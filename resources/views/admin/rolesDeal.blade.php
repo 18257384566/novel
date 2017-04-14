@@ -1,8 +1,8 @@
 @extends('layouts.master')
-@section('title','权限管理')
+@section('title','权限修改')
 @section('link')
     <style>
-        /*table td{width:20%;}*/
+        input{height:30px;}
     </style>
 @endsection
 {{--nav--}}
@@ -35,50 +35,30 @@
 {{--content--}}
 @section('content')
     <div class="container">
-        <span class="shortcut-icon icon-plus" aria-hidden="true"><a href="{{asset('admin/roles-add')}}">新增角色</a></span> &nbsp;&nbsp;
+        <span class="shortcut-icon icon-plus" aria-hidden="true"><a href="">更新角色</a></span> &nbsp;&nbsp;
         <span class="shortcut-icon icon-trash" aria-hidden="true"><a href="">批量删除</a></span> &nbsp;&nbsp;
         <span class="shortcut-icon icon-circle-arrow-down" aria-hidden="true"><a href="">更新排序</a></span> &nbsp;&nbsp;
         <hr>
-        <table class="table table-bordered">
-            <tbody>
-            <tr>
-                <th>ID</th>
-                <th>权限路由</th>
-                <th>权限名称</th>
-                <th>权限描述</th>
-                <th>角色权限</th>
-                <th>操作</th>
-            </tr>
-            {{--@foreach($result as $res)--}}
-            {{--<tr>--}}
-                {{--<td>{{$res->id}}</td>--}}
-                {{--<td>{{$res->name}}</td>--}}
-                {{--<td>{{$res->display_name}}</td>--}}
-                {{--<td>{{$res->description}}</td>--}}
-                {{--<td></td>--}}
-                {{--<td><a href="/admin/deal/{{$res->id}}">分配权限</a>
-                <a href="/admin/roles-Update/{{$res->id}}">修改</a> <a href="/admin/roles-del/{{$res->id}}">删除</a></td>--}}
-            {{--</tr>--}}
-            {{--@endforeach--}}
-            @foreach($roles as $role)
-                <tr>
-                    <td class="tc">{{$role->id}}</td>
-                    <td>{{$role->name}}</td>
-                    <td>{{$role->display_name}}</td>
-                    <td>{{$role->description}}</td>
-                    <td>{{$role->perms}}</td>
-                    <td>
-                        <a href="/admin/deal/{{$role->id}}">分配权限</a>
-                        <a href="/admin/roles-Update/{{$role->id}}">修改</a>
-                        <a href="/admin/roles-del/{{$role->id}}">删除</a>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-        {{--{{ $result ->links() }}--}}
-    </div>
-    </div>
 
+        <!--面包屑导航 开始-->
+        <div class="crumb_warp">
+            <!--<i class="fa fa-bell"></i> 欢迎使用登陆网站后台，建站的首选工具。-->
+            <i class="fa fa-home"></i> <a href="#">首页</a> &raquo; <a href="#">权限管理</a> &raquo; 分配权限
+        </div>
+        <!--面包屑导航 结束-->
+        <br>
+            <form action="" method="post">
+                {{csrf_field()}}
+                 @foreach($perm as $item)
+                <input type="checkbox" name="permission_id[]" value="{{$item->id}}"> {{$item->name}}
+                @endforeach
+                <br><br>
+                     <input type="submit" value="提交">
+                    <input type="button" class="back" onclick="history.go(-1)" value="返回">
+            </form>
+
+        <br>
+
+        <br><br><br>
 @endsection
 {{--!content--}}
